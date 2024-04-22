@@ -104,24 +104,23 @@ char *removeAllSpaces(char *line)
 
 int getInt(char *line, int index)
 {
-  int res;
-  char strInt[MAX_EXPR_LENGTH];
-  strInt[0] = line[index];
-
-  index++;
+  int j = 0;
+  char *strInt = NULL;
 
   while (1)
   {
-    if (!isdigit(line[index]) || index > strlen(strInt))
+    if (!isdigit(line[index]) || index > strlen(line))
     {
       break;
     }
 
-    strInt[strlen(strInt)] = line[index];
+    j++;
+
+    strInt = realloc(strInt, sizeof(char) * j);
+    strInt[j - 1] = line[index];
+
     index++;
   }
 
-  res = atoi(strInt);
-
-  return res;
+  return atoi(strInt);
 }
